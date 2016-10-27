@@ -61,6 +61,7 @@
 #include "qgroup.h"
 #include "tree-log.h"
 #include "compression.h"
+#include "dedupe.h"
 
 #ifdef CONFIG_64BIT
 /* If we have a 32-bit userspace and 64-bit kernel, then the UAPI
@@ -1142,6 +1143,7 @@ static int cluster_pages_for_defrag(struct inode *inode,
 
 	if (inode_need_compress(inode))
 		reserve_type = BTRFS_RESERVE_COMPRESS;
+
 	ret = btrfs_delalloc_reserve_space(inode,
 			start_index << PAGE_SHIFT,
 			page_cnt << PAGE_SHIFT, reserve_type);
